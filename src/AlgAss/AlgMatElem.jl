@@ -229,7 +229,7 @@ function one(A::MatAlgebra)
   if !has_one(A)
     error("Algebra does not have a one")
   end
-  return A(identity_matrix(coefficient_ring(A), degree(A), degree(A), check = false)) # deepcopy needed by mul!
+  return A(identity_matrix(coefficient_ring(A), degree(A)), check = false) # deepcopy needed by mul!
 end
 
 function (A::MatAlgebra)()
