@@ -709,7 +709,7 @@ end
 #
 ################################################################################
 
-function opposite_algebra(A::MatAlgebra)
+@attr Tuple{typeof(A), morphism_type(typeof(A), typeof(A))} function opposite_algebra(A::MatAlgebra)
   BA = basis(A)
   BAt = [transpose(matrix(a, copy = false)) for a in BA]
   Aop = matrix_algebra(coefficient_ring(A), BAt, isbasis = true)
