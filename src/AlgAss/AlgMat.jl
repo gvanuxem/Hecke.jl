@@ -710,8 +710,8 @@ end
 ################################################################################
 
 function opposite_algebra(A::MatAlgebra)
-  B, BtoA = StructureConstantAlgebra(A)
-  O, BtoO = opposite_algebra(B)
-  return O, compose_and_squash(BtoO, inv(BtoA))
+  BA = basis(A)
+  BAt = [transpose(matrix(a, copy = false)) for a in BA]
+  Aop = matrix_algebra(coefficient_ring(A), BAt, isbasis = true)
+  return Aop, hom(A, Aop, map(x -> Aop(x, check = false, deepcopy = false), BAt))
 end
-
