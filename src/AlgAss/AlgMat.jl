@@ -711,7 +711,9 @@ end
 
 @attr Tuple{typeof(A), morphism_type(typeof(A), typeof(A))} function opposite_algebra(A::MatAlgebra)
   BA = basis(A)
+  d = dim(A)
+  K = coefficient_ring(A)
   BAt = [transpose(matrix(a, copy = false)) for a in BA]
   Aop = matrix_algebra(coefficient_ring(A), BAt, isbasis = true)
-  return Aop, hom(A, Aop, map(x -> Aop(x, check = false, deepcopy = false), BAt))
+  return Aop, hom(A, Aop, identity_matrix(K, d), identity_matrix(K, d))
 end
